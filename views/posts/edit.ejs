@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+<form action="/posts/edit/<%= post.id %>" method="post" enctype="multipart/form-data" class="w-50 m-auto p-5 shadow mt-5">
+    <h2>Edit Post</h2>
+
+    <div class="mb-3">
+        <label for="user_id">Author:</label>
+        <select name="user_id" required disabled class="form-control" id="">
+            <% users.forEach(user => { %>
+             <option value="<%= user.id %>" <%= post.user_id === user.id ? 'selected' : '' %>><%= user.name %></option>
+            <% }) %>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" name="title" required value="<%= post.title %>">
+    </div>
+
+    <div class="mb-3">
+        <label for="content">Content:</label>
+        <textarea name="content" required class="form-control" id=""><%= post.content %></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="photo">Photo:</label>
+        <% if (post.photo) { %>
+         <div>
+            <img src="/uploads/<%= post.photo %>" alt="Post Photo" style="max-width: 50%; height: auto;">
+         </div>
+         <small>Current Photo</small>
+        <% } %>
+        <input type="file" class="form-control" name="photo" accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+<%- include('../partials/footer') %>
