@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+<form action="/posts/create" method="post" enctype="multipart/form-data" class="w-50 m-auto p-5 shadow mt-5">
+    <h2>Create New Post</h2>
+
+    <div class="mb-3">
+        <label for="user_id">Author:</label>
+        <select name="user_id" required class="form_control" id="">
+            <% users.forEach(user => { %>
+             <option value="<%= user.id %>"><%= user.name %></option>
+            <% }) %>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" name="title" required>
+    </div>
+
+    <div class="mb-3"></div>
+        <label for="content">Content:</label>
+        <textarea name="content" class="form-control" required id=""></textarea>
+    </div>
+
+    <div class="mb-3"></div>
+        <label for="photo">Photo:</label>
+        <input type="file" class="form-control" name="photo" accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-success">Create</button>
+</form>
