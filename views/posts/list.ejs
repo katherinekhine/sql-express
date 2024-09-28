@@ -1,0 +1,32 @@
+<% include('../partials/header') %>
+<h1>Post List</h1>
+<a href="/posts/create" class="btn btn-success">Create New Posts</a>
+<ul>
+  <% posts.forEach(post => { %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <% if (post.photo) { %>
+      <div>
+        <img
+          src="/uploads/<%= post.photo %>"
+          alt="Post Photo"
+          style="width: 300px; height: auto"
+        />
+      </div>
+      <% } %>
+      <h2><%= post.title %></h2>
+      <p>By <%= post.author %> on <%= post.created_at %></p>
+      <p><%= post.content %></p>
+      <a href="/posts/edit/<%= post.id %>" class="btn btn-warning">Edit</a>
+      <form
+        action="/posts/delete/<%= post.id %>"
+        method="post"
+        style="display: inline"
+      >
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+  <% }) %>
+</ul>
+<%- include('../partials/footer') %>
